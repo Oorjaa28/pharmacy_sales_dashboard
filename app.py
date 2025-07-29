@@ -53,5 +53,9 @@ def dashboard():
                            bar_chart=bar_html,
                            line_chart=line_html)
 
+import os
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))  # default Render port
+    app.run(host='0.0.0.0', port=port)
+
