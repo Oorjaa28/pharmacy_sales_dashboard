@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmacy OTC Sales Analytics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1 class="dashboard-title">Pharmacy OTC Sales Analytics Dashboard</h1>
+    <p class="subtitle">By - Oorjaa Kataria</p>
+
+    <div class="summary-cards">
+        <div class="card">
+            <h3>Total Records</h3>
+            <p>{{ total_records }}</p>
+        </div>
+        <div class="card">
+            <h3>Avg. Boxes Shipped</h3>
+            <p>{{ avg_boxes }}</p>
+        </div>
+        <div class="card">
+            <h3>Total Revenue ($)</h3>
+            <p>${{ total_amount }}</p>
+        </div>
+        <div class="card">
+            <h3>Top Seller</h3>
+            <p>{{ top_seller }}</p>
+        </div>
+    </div>
+
+    <form method="POST" class="filter-form">
+        <label for="country">Filter by Country:</label>
+        <select name="country" id="country" onchange="this.form.submit()">
+            <option value="">All</option>
+            {% for country in countries %}
+                <option value="{{ country }}" {% if country == selected_country %}selected{% endif %}>{{ country }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <div class="chart">
+        {{ bar_chart|safe }}
+    </div>
+
+    <div class="chart">
+        {{ line_chart|safe }}
+    </div>
+
+    <div class="data-table">
+        {{ tables|safe }}
+    </div>
+</body>
+</html>
